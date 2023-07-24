@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <p>[ <a href="index.html">Home</a> |
+        <a href="members.html">Members</a> |
+        <a href="activities.html">Activities</a> |
+        <a href="equipment.html">Equipment</a> | 
+        <a href="reservations.html">Reservations</a></a> ]</p> 
+        <h1>Members</h1>
+    <p>Current Members</p>
+    <table>
+        <tr>
+            <th>memberID</th>
+            <th>name</th>
+            <th>email</th>
+            <th>phone</th>
+            <th>join date</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Abhram Medina</td>
+            <td>abhram@gmail.com</td>
+            <td>555-432-1987</td>
+            <td>2020-01-01</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Chris McDaniel</td>
+            <td>Chris@yahoo.com</td>
+            <td>555-432-9856</td>
+            <td>2020-03-01</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Bob Davis</td>
+            <td>bob@davisinc.com</td>
+            <td>555-465-7410</td>
+            <td>2022-12-01</td>
+        </tr>
+    </table>
+    <div>    
+        <h2>Add a Member</h2>
+        <form method="POST" id="addMember">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td>Join Date:</td>
+                    <td><input type="date" id="releaseDate"></td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div>    
+        <h2>Edit Member</h2>
+        <form method="PUT" id="editMember">
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td><input type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td>Phone:</td>
+                    <td><input type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td>Join Date:</td>
+                    <td><input type="date" id="releaseDate"></td>
+                </tr>
+          
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div>    
+        <h2>Delete a Member</h2>
+        <form method="DELETE" id="deleteMember">
+            <table>
+                <tr>
+                    <td>Member:
+                        <td><input type="text" id="releaseDate"></td>
+                    </td>
+                    <td>
+                      </td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+</body>
+
+</html>

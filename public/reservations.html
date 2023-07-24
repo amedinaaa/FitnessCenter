@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <p>[ <a href="index.html">Home</a> |
+        <a href="members.html">Members</a> |
+        <a href="activities.html">Activities</a> |
+        <a href="equipment.html">Equipment</a> | 
+        <a href="reservations.html">Reservations</a></a> ]</p> 
+        <h1>Reservations</h1>
+    <p>Current Reservations</p>
+    <table>
+        <tr>
+            <th>reservationID</th>
+            <th>memberID</th>
+            <th>activityID</th>
+            <th>reservation start</th>
+            <th>reservation end</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>2023-08-01 11:00:00</td>
+            <td>2023-08-01 13:00:00</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>2</td>
+            <td>1</td>
+            <td>2023-08-01 08:00:00</td>
+            <td>2023-08-01 12:00:00</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>1</td>
+            <td>4</td>
+            <td>2023-08-02 17:00:00</td>
+            <td>2023-08-02 19:00:00</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>3</td>
+            <td>3</td>
+            <td>2023-08-03 10:00:00</td>
+            <td>2023-08-03 13:00:00</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2023-08-01 12:00:00</td>
+            <td>2023-08-01 13:00:00</td>
+        </tr>
+    </table>
+    <div>    
+        <h2>Add a Reservation</h2>
+        <form method="POST" id="addMember">
+            <table>
+                <tr>
+                    <td>reservationID:</td>
+                    <td><input type="text" id="reservationID"></td>
+                </tr>
+                <tr>
+                    <td>memberID:</td>
+                    <td><input type="text" id="memberID"></td>
+                </tr>
+                <tr>
+                    <td>activityID:</td>
+                    <td><input type="text" id="activityID"></td>
+                </tr>
+                <tr>
+                    <td>Reservation start:</td>
+                    <td><input type="date" id="reservationStart"></td>
+                </tr>
+                <tr>
+                    <td>Reservation end</td>
+                    <td><input type="date" id="reservationEnd"></td>
+                </tr>      
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div>    
+        <h2>Delete a Reservation</h2>
+        <form method="DELETE" id="deleteMember">
+            <table>
+                <tr>
+                    <td>Reservation ID:
+                        <td><input type="text" id="deleteReserve"></td>
+                    </td>
+                    <td>
+                      </td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+
+</body>
+
+</html>

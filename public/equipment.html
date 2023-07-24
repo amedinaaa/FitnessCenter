@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <p>[ <a href="index.html">Home</a> |
+        <a href="members.html">Members</a> |
+        <a href="activities.html">Activities</a> |
+        <a href="equipment.html">Equipment</a> | 
+        <a href="reservations.html">Reservations</a></a> ]</p> 
+        <h1>Equipment</h1>
+    <p>List of equipment</p>
+    <table>
+        <tr>
+            <th>equipmentID</th>
+            <th>Name</th>
+            <th>Item Count</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Gym</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Squash Court</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Treadmill</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Stationary Bike</td>
+            <td>5</td>
+        </tr>
+    </table>
+    <div>    
+        <h2>Add Equipment for an activity</h2>
+        <form method="POST" id="addEquipment">
+            <table>
+                <tr>
+                    <td>equipmentID:</td>
+                    <td><input type="text" id="equipmentID"></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Item Count:</td>
+                    <td><input type="text" id="itemCount"></td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div>    
+        <h2>Delete a piece of equipment</h2>
+        <form method="DELETE" id="deleteEquipment">
+            <table>
+                <tr>
+                    <td>Equipment name:
+                        <td><input type="text" id="deleteEquipment"></td>
+                    </td>
+                    <td>
+                      </td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+</body>
+
+</html>

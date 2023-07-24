@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link id="styleSheet" href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <p>[ <a href="index.html">Home</a> |
+        <a href="members.html">Members</a> |
+        <a href="activities.html">Activities</a> |
+        <a href="equipment.html">Equipment</a> | 
+        <a href="reservations.html">Reservations</a></a> ]</p> 
+        <h1>Activities</h1>
+    <p>Activity list</p>
+    <table>
+        <tr>
+            <th>activityID</th>
+            <th>name</th>
+            <th>equipmentID</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Basketball</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Running in Place</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Squash</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Zumba</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Spin Class</td>
+            <td>4</td>
+        </tr>
+    </table>
+    <div>    
+        <h2>Add an activity</h2>
+        <form method="POST" id="addActivity">
+            <table>
+                <tr>
+                    <td>activityID:</td>
+                    <td><input type="text" id="activityID"></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>equipmentID:</td>
+                    <td><input type="text" id="equipmentID"></td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+    <div>    
+        <h2>Delete an Activity</h2>
+        <form method="DELETE" id="deleteActivity">
+            <table>
+                <tr>
+                    <td>Activity:
+                        <td><input type="text" id="deleteAct"></td>
+                    </td>
+                    <td>
+                      </td>
+                </tr>
+            </table>
+        <input type="submit" value="Submit">
+      </form> 
+    </div>
+</body>
+
+</html>
