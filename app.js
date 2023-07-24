@@ -1,5 +1,6 @@
-var express = require('express');   // We are using the express library for the web server
-var app     = express();            // We need to instantiate an express object to interact with the server in our code
+const express = require('express');   
+const app     = express(); 
+app.use(express.static('public'));       
 PORT        = 50408;  
 
 app.get('/', function(req, res)
