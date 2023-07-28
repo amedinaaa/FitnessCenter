@@ -7,20 +7,28 @@
 </head>
 
 <body>
-    <p>[ <a href="index.html">Home</a> |
-        <a href="members.html">Members</a> |
+    <div class='navbar'>
+        <div class='title'>
+            <a href="index.html"><img src='/FitnessCenterIMG.png'/></a>
+            <a href="index.html" id="fitnesshome"><h1> The Fitness Center</h1> </a>
+        </div> 
+
+    <p> <a href="index.html">Home</a> |
+        <a href="members.html">[ Members ]</a> |
         <a href="activities.html">Activities</a> |
         <a href="equipment.html">Equipment</a> | 
-        <a href="reservations.html">Reservations</a></a> ]</p> 
+        <a href="reservations.html">Reservations</a></a> </p> 
+        <hr/>
         <h1>Members</h1>
     <p>Current Members</p>
-    <table>
+    <table class="main-table">
         <tr>
-            <th>memberID</th>
-            <th>name</th>
-            <th>email</th>
-            <th>phone</th>
-            <th>join date</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Join date</th>
+            <th>Delete</th>
         </tr>
         <tr>
             <td>1</td>
@@ -28,6 +36,7 @@
             <td>abhram@gmail.com</td>
             <td>555-432-1987</td>
             <td>2020-01-01</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>2</td>
@@ -35,6 +44,7 @@
             <td>Chris@yahoo.com</td>
             <td>555-432-9856</td>
             <td>2020-03-01</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>3</td>
@@ -42,15 +52,40 @@
             <td>bob@davisinc.com</td>
             <td>555-465-7410</td>
             <td>2022-12-01</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
     </table>
-    <div>    
-        <h2>Add a Member</h2>
+    <div class='section'>
+        <h2>Search for a member</h2>
+        <form id='search-member-html' method='GET' action='/members.html'>
+            <table class='sub-table'>
+                <tr>
+                    <td><p><label for='input-owner_name'>Member: </label></p></td>
+                    <td><input
+                            type='text'
+                            name='member_name'
+                            id='input-member_name-html-search'
+                            required
+                        /></td>
+                </tr>
+            </table>
+            <div class='form-btns'>
+                <input type='submit' value='Search' />
+                <a href='/members.html'><input type='button' value='Reset' /></a>
+            </div>
+        </form>
+    </div>
+    <div class="section">    
+        <h2>Add a member</h2>
+        <p><em>A form of contact, either email and/or phone, for members is required
+		</em></p>
         <form method="POST" id="addMember">
-            <table>
+            <table class="sub-table">
                 <tr>
                     <td>Name:</td>
-                    <td><input type="text" id="name"></td>
+                    <td><input type="text" id="name" required></td>
+                    <td>*Required</td>
+
                 </tr>
                 <tr>
                     <td>Email:</td>
@@ -62,16 +97,41 @@
                 </tr>
                 <tr>
                     <td>Join Date:</td>
-                    <td><input type="date" id="releaseDate"></td>
+                    <td><input type="date" id="releaseDate" required ></td>
+                    <td>*Required</td>
                 </tr>
             </table>
-        <input type="submit" value="Submit">
+            <div class='form-btns'>
+                <input type='submit' value='Create' />
+                <a href='/members.html'><input type='button' value='Cancel' /></a>
+            </div>
       </form> 
     </div>
-    <div>    
-        <h2>Edit Member</h2>
-        <form method="PUT" id="editMember">
-            <table>
+    <div class="section" >    
+        <h2>Edit a member</h2>
+        <p><em>Select a member from the drop-down menu and input new information for the member
+		</em></p>
+	<form id='edit-member' method='POST' action='/edit-member'>
+            <table class="sub-table">
+                <tr>
+                    <td><label for='member_id'>Select a member: </label></td>
+                    <td><select
+                            name='member_id'
+                            id='edit_member_selection'
+                            onChange='formFill()'
+                            required
+                        >
+                        <option value='member'>Select a member</option>
+							<option value='1'>Abhram Medina
+						</option>
+							<option value='2'>Chris McDaniel
+							</option>
+							<option value='3'>Bob Davis
+								</option>
+                        </select></td>
+                        <td>*Required</td>
+                    
+                </tr>
                 <tr>
                     <td>Name:</td>
                     <td><input type="text" id="name"></td>
@@ -90,24 +150,14 @@
                 </tr>
           
             </table>
-        <input type="submit" value="Submit">
-      </form> 
-    </div>
-    <div>    
-        <h2>Delete a Member</h2>
-        <form method="DELETE" id="deleteMember">
-            <table>
-                <tr>
-                    <td>Member:
-                        <td><input type="text" id="releaseDate"></td>
-                    </td>
-                    <td>
-                      </td>
-                </tr>
-            </table>
-        <input type="submit" value="Submit">
+            <div class='form-btns'>
+                <input type='submit' value='Edit' />
+                <a href='/members.html'>
+                    <input type='button' value='Cancel' /></a>
+            </div>
       </form> 
     </div>
 </body>
-
+<hr/>
+<p><em>© 2023 Abhram Medina, Chris McDaniel</em></p>
 </html>
