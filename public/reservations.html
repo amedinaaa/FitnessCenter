@@ -21,13 +21,13 @@
         <hr/>
         <h1>Reservations</h1>
     <p>Current Reservations</p>
-    <table>
+    <table class='main-table'> 
         <tr>
             <th>ID</th>
-            <th>member</th>
-            <th>activity</th>
-            <th>reservation start</th>
-            <th>reservation end</th>
+            <th>MemberID</th>
+            <th>ActivityID</th>
+            <th>Reservation start</th>
+            <th>Reservation end</th>
         </tr>
         <tr>
             <td>1</td>
@@ -65,47 +65,30 @@
             <td>2023-08-01 13:00:00</td>
         </tr>
     </table>
-    <div>    
+    <div class="section"></div>    
         <h2>Add a Reservation</h2>
         <form method="POST" id="addMember">
-            <table>
+            <table class="sub-table">
                 <tr>
-                    <td>reservationID:</td>
-                    <td><input type="text" id="reservationID"></td>
-                </tr>
-                <tr>
-                    <td>memberID:</td>
+                    <td>MemberID:</td>
                     <td><input type="text" id="memberID"></td>
                 </tr>
                 <tr>
-                    <td>activityID:</td>
+                    <td>ActivityID:</td>
                     <td><input type="text" id="activityID"></td>
                 </tr>
                 <tr>
                     <td>Reservation start:</td>
-                    <td><input type="date" id="reservationStart"></td>
+                    <td><input type="datetime-local" id="reservationStart"></td>
                 </tr>
                 <tr>
                     <td>Reservation end</td>
-                    <td><input type="date" id="reservationEnd"></td>
+                    <td><input type="datetime-local" id="reservationEnd"></td>
                 </tr>      
             </table>
-        <input type="submit" value="Submit">
-      </form> 
+    <div class="form-btns">
+        <input type="submit" value="Add">
     </div>
-    <div>    
-        <h2>Delete a Reservation</h2>
-        <form method="DELETE" id="deleteMember">
-            <table>
-                <tr>
-                    <td>Reservation ID:
-                        <td><input type="text" id="deleteReserve"></td>
-                    </td>
-                    <td>
-                      </td>
-                </tr>
-            </table>
-        <input type="submit" value="Submit">
       </form> 
     </div>
 

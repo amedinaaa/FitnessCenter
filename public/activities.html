@@ -21,71 +21,62 @@
         <hr/>
         <h1>Activities</h1>
     <p>Activity list</p>
-    <table>
+    <table class="main-table">
         <tr>
-            <th>ID</th>
-            <th>name</th>
-            <th>equipment</th>
+            <th>ID</th> 
+            <th>Name</th>
+            <th>EquipmentID</th>
+            <th>Delete</th>
+           
         </tr>
         <tr>
             <td>1</td>
             <td>Basketball</td>
             <td>1</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>2</td>
             <td>Running in place</td>
             <td>3</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>3</td>
             <td>Squash</td>
             <td>2</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>4</td>
             <td>Zumba</td>
             <td>1</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
         <tr>
             <td>5</td>
             <td>Spin class</td>
             <td>4</td>
+            <td><button onclick="">Delete</button></td>
         </tr>
     </table>
-    <div>    
+    <div class="section">    
         <h2>Add an activity</h2>
         <form method="POST" id="addActivity">
-            <table>
-                <tr>
-                    <td>activityID:</td>
-                    <td><input type="text" id="activityID"></td>
-                </tr>
+            <table class='sub-table'>
                 <tr>
                     <td>Name:</td>
                     <td><input type="text" id="name"></td>
                 </tr>
                 <tr>
-                    <td>equipmentID:</td>
+                    <td>EquipmentID:</td> 
                     <td><input type="text" id="equipmentID"></td>
                 </tr>
             </table>
-        <input type="submit" value="Submit">
-      </form> 
+    <div class="form-btns">
+        <input type="submit" value="Add">
     </div>
-    <div>    
-        <h2>Delete an activity</h2>
-        <form method="DELETE" id="deleteActivity">
-            <table>
-                <tr>
-                    <td>Activity:
-                        <td><input type="text" id="deleteAct"></td>
-                    </td>
-                    <td>
-                      </td>
-                </tr>
-            </table>
-        <input type="submit" value="Submit">
+        
       </form> 
     </div>
 </body>
