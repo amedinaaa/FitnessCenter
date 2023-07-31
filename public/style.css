@@ -107,14 +107,14 @@ body {
 /* FORMS */
 
 select {
-  width: 180px;
+  width: 186px;
 }
 
 input[type="text"],
 input[type="date"],
 input[type="datetime-local"]
 {
-  width: 170px;
+  width: 180px;
 }
 
 textarea {
