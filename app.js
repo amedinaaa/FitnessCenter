@@ -9,7 +9,7 @@ const app     = express();
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('public')) 
-PORT        = 50900;  
+PORT        = 50905;  
 // Database
 const db = require('./database/db-connector')
 // Handlebars
@@ -26,25 +26,28 @@ app.set('view engine', '.hbs');
 */
 app.get('/', function(req, res)
     {
-        let query1 = "SELECT * FROM bsg_people;";
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('index', {data: rows});
-        })
+    let query1 = "SELECT * FROM bsg_people;";
+    db.pool.query(query1, function(error, rows, fields){
+        res.render('index', {data: rows});
+    })
+                
     });
+
 
 app.get('/members.hbs', function(req, res)
     {
-        let query1 = "SELECT * FROM Members";
-        db.pool.query(query1, function(error, rows, fields) {
+    let query1 = "SELECT * FROM Members;";
+    db.pool.query(query1, function(error, rows, fields){
             res.render('members.hbs', {data: rows});
+        })
         });        
-    });
+   
  app.get('/activities.hbs', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('activites', {data: rows});
-        });
+        })
     });
 app.get('/reservations.hbs', function(req, res)
     {
@@ -66,26 +69,26 @@ app.get('/equipment.hbs', function(req, res)
 
 // Members
 // Search for members
-app.post('/add-member', function(req, res) {
+app.post('/addMember', function(req, res) {
     let body = req.body;
 
-    const name = body.name;
-    const email = body.email;
-    let phone_number;
-    if (body.phone_number != '') {
-        phone_number = body.phone_number
+    let name = body.name;
+    let email = body.email;
+    let phone;
+    if (body.phone != '') {
+        phone = body.phone
     } else {
-        phone_number = 'NULL'
+        phone = 'NULL'
     }
-    const join_date = body.joinDate;
+    let join_date = body.join_date;
 
-    query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone_number}', '${join_date}')`;    
+    query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone}', '${join_date}')`;    
     db.pool.query(query, function(error, row, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.redirect('/members');
+            res.redirect('/members.hbs');
         }
     });
 });
