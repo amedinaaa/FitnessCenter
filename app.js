@@ -33,15 +33,18 @@ app.get('/', function(req, res)
     });
 
 app.get('/members.hbs', function(req, res)
-    {res.render('members.hbs');
-        
+    {
+        let query1 = "SELECT * FROM Members";
+        db.pool.query(query1, function(error, rows, fields) {
+            res.render('members.hbs', {data: rows});
+        });        
     });
  app.get('/activities.hbs', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('activites', {data: rows});
-        })
+        });
     });
 app.get('/reservations.hbs', function(req, res)
     {
@@ -63,6 +66,71 @@ app.get('/equipment.hbs', function(req, res)
 
 // Members
 // Search for members
+app.post('/add-member', function(req, res) {
+    let body = req.body;
+
+    const name = body.name;
+    const email = body.email;
+    let phone_number;
+    if (body.phone_number != '') {
+        phone_number = body.phone_number
+    } else {
+        phone_number = 'NULL'
+    }
+    const join_date = body.joinDate;
+
+    query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone_number}', '${join_date}')`;    
+    db.pool.query(query, function(error, row, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/members');
+        }
+    });
+});
+
+app.put('/edit-member/', function(req, res) {
+    let body = req.body;
+
+    const id = parseInt(body.id);
+    const name = body.name;
+    const email = body.email;
+    let phone_number;
+    if (body.phone_number != '') {
+        phone_number = body.phone_number
+    } else {
+        phone_number = 'NULL'
+    }
+    const join_date = body.joinDate;
+    
+    query = `UPDATE Members SET name = ?, email = ?, phone = ?, join_date = ? WHERE memberId = ?`;
+    db.pool.query(query, [name, email, phone_number, join_date, id], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        }
+        else {
+            res.send(rows);
+        }
+    });
+});
+
+app.delete('/delete-member', function(req, res) {
+    let body = req.body;
+
+    const id = body.id;
+    
+    query = 'DELETE FROM Members WHERE id = ?';
+    db.pool.query(query, [id], function(error, rows, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
 
 
 
