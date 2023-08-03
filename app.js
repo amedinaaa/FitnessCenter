@@ -1,25 +1,69 @@
-import express from 'express';
+/*
+SETUP
+*/
 
+// Express
 
 const express = require('express');   
-const app     = express(); 
-app.use(express.static('public'));       
-PORT        = 50408;  
+const app     = express();
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static('public')) 
+PORT        = 50900;  
 // Database
-var db = require('./public/db-connector')
+const db = require('./database/db-connector')
+// Handlebars
+const { engine } = require('express-handlebars');
+var exphbs = require('express-handlebars');
+const { query } = require('express');
+app.engine('.hbs', exphbs({
+    extname: ".hbs"
+}));
+app.set('view engine', '.hbs');
+
+/*
+    ROUTES
+*/
+app.get('/', function(req, res)
+    {
+        let query1 = "SELECT * FROM bsg_people;";
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('index', {data: rows});
+        })
+    });
+
+app.get('/members.hbs', function(req, res)
+    {res.render('members.hbs');
+        
+    });
+ app.get('/activities.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM bsg_people;";
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('activites', {data: rows});
+        })
+    });
+app.get('/reservations.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM bsg_people;";
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('reservations', {data: rows});
+        })
+    });
+app.get('/equipment.hbs', function(req, res)
+    {
+        let query1 = "SELECT * FROM bsg_people;";
+        db.pool.query(query1, function(error, rows, fields){
+            res.render('equipment', {data: rows});
+        })
+    });
+
+
+ 
 
 // Members
 // Search for members
-app.use(express.json());
 
-app.get('/members.html/:_member_name', async (req, res) => { 
-    query1= `SELECT * FROM Members WHERE name LIKE "%${req.params._member_name}%";`;
-    db.pool.query(query1, function(err, results, fields){
-        // Send the results to the browser
-        let base = "<h1>MySQL Results:</h1>"
-        res.send(base + JSON.stringify(results));
-    });
-});
 
 
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
