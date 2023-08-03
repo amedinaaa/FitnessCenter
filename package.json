@@ -1,24 +1,17 @@
 {
-  "name": "fitc",
+  "name": "step-4",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the bread-and-butter section where Node.js really begins to shine. We are going to get data from a MySQL query and present it in a meaningful manner on the browser.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/amedinaaa/FitnessCenter.git"
-  },
-  "author": "",
+  "author": "George Kochera",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/amedinaaa/FitnessCenter/issues"
-  },
-  "homepage": "https://github.com/amedinaaa/FitnessCenter#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "forever": "^4.0.3"
-  },
-  "devDependencies": {}
+    "express-handlebars": "^4.0.0",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
 }
