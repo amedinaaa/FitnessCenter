@@ -25,42 +25,36 @@
         <h1>Members</h1>
     <p>Current Members</p>
     <table class="main-table">
+    <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Join date</th>
+            {{#each data.[0]}}
+            <th>{{@key}}</th>
+            
+            {{/each}}
             <th>Delete</th>
+            
         </tr>
+        </thead>
+        
+        <tbody>
+            
+            {{#each data}}
+        
         <tr>
-            <td>1</td>
-            <td>Abhram Medina</td>
-            <td>abhram@gmail.com</td>
-            <td>555-432-1987</td>
-            <td>2020-01-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Chris McDaniel</td>
-            <td>Chris@yahoo.com</td>
-            <td>555-432-9856</td>
-            <td>2020-03-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Bob Davis</td>
-            <td>bob@davisinc.com</td>
-            <td>555-465-7410</td>
-            <td>2022-12-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
+  
+        <td>{{this.memberID}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.phone}}</td>
+        <td>{{this.join_date}}</td>
+        <td><button onclick="/delete-member">Delete</button></td>
+       </tr>
+        {{/each}}
+    </tbody>
     </table>
     <div class='section'>
         <h2>Search for a member</h2>
-        <form id='search-member-html' method='GET' action='/members.html'>
+        <form id='search-member-html' method='GET' action='/members.hbs'>
             <table class='sub-table'>
                 <tr>
                     <td><p><label for='input-owner_name'>Member name: </label></p></td>
@@ -74,38 +68,38 @@
             </table>
             <div class='form-btns'>
                 <input type='submit' value='Search' />
-                <a href='/members.html'><input type='button' value='Back' /></a>
+                <a href='/members.hbs'><input type='button' value='Back' /></a>
             </div>
         </form>
     </div>
     <div class="section">    
         <h2>Add a member</h2>
-        <form method="POST" id="addMember">
+        <form method="POST" id="addMember" action="/addMember">
             <table class="sub-table">
                 <tr>
-                    <td>Name:</td>
-                    <td><input type="text" id="name"  required></td>
+                    <td><label for='name'>Name:</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
                     <td>*Required</td>
 
                 </tr>
                 <tr>
-                    <td>Email:</td>
-                    <td><input type="text" id="email" required></td>
+                    <td><label for='Email'>Email:</label></td>
+                    <td><input type="text" id="email" name="email" required></td>
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>Phone:</td>
-                    <td><input type="text" id="email"></td>
+                    <td><label for='phone'>Phone:</label></td>
+                    <td><input type="text" id="phone" name="phone"></td>
                 </tr>
                 <tr>
-                    <td>Join Date:</td>
-                    <td><input type="date" id="releaseDate" required ></td>
+                    <td><label for='join_date'>Join_date:</label></td>
+                    <td><input type="date" id="join_date" name='join_date'required ></td>
                     <td>*Required</td>
                 </tr>
             </table>
             <div class='form-btns'>
                 <input type='submit' value='Create' />
-                <a href='/members.html'><input type='button' value='Cancel' /></a>
+                <a href='/members.hbs'><input type='button' value='Cancel' /></a>
             </div>
       </form> 
     </div>
@@ -166,37 +160,5 @@
 <hr/>
 <p><em>© 2023 Abhram Medina, Chris McDaniel</em></p>
 </html>
-{{!-- The Data from our Database --}}
 
-{{!-- Create a table --}}
-<table>
-
-    {{!-- Header section --}}
-    <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
-
-    {{!-- Body section --}}
-    <tbody>
-
-        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
-        {{#each data}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.fname}}</td>
-            <td>{{this.lname}}</td>
-            <td>{{this.homeworld}}</td>
-            <td>{{this.age}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+  
