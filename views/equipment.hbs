@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link id="styleSheet" href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class='navbar'>
+        <div class='title'>
+            <a href="/"><img src='imgs/FitnessCenterIMG.png'/></a>
+            <a href="/"><h1> The Fitness Center</h1> </a>
+        </div> 
+
+<p> <a href="/"> Home </a> |
+        <a href="members.hbs">Members</a> |
+        <a href="activities.hbs">Activities</a> |
+        <a href="equipment.hbs">[ Equipment ]</a> | 
+        <a href="reservations.hbs">Reservations</a></a> </p>
+        <hr/>
+        <h1>Equipment</h1>
+    <p>List of equipment</p>
+    <table class="main-table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Item Count</th>
+            <th>Delete</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Gym</td>
+            <td>1</td>
+            <td><button onclick="">Delete</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Squash Court</td>
+            <td>1</td>
+            <td><button onclick="">Delete</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Treadmill</td>
+            <td>5</td>
+            <td><button onclick="">Delete</button></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Stationary bike</td>
+            <td>5</td>
+            <td><button onclick="">Delete</button></td>
+        </tr>
+    </table>
+    <div class="section"></div> 
+        <h2>Add equipment for an activity</h2>
+        <form method="POST" id="addEquipment">
+            <table class='sub-table'>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td>Item Count:</td>
+                    <td><input type="text" id="itemCount"></td>
+                </tr>
+            </table>
+        <div class='form-btns'>
+        <input type="submit" value="Submit">
+        </div>
+      </form> 
+    </div>
+</body>
+<hr/>
+<p><em>© 2023 Abhram Medina, Chris McDaniel</em></p>
+
+</html>
