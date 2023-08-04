@@ -4,56 +4,58 @@ SETUP
 
 // Express
 
-const express = require('express');   
-const app     = express();
+var express = require('express');   // We are using the express library for the web server
+var app     = express();            // We need to instantiate an express object to interact with the server in our code
+PORT        = 50900;                 // Set a port number at the top so it's easy to change in the future
+
+// app.js
+const { engine } = require('express-handlebars');
+var exphbs = require('express-handlebars');     // Import express-handlebars
+app.engine('.hbs', exphbs({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
+
+// Database
+var db = require('./database/db-connector')
+
+// app.js - SETUP section
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static('public')) 
-PORT        = 50900;  
-// Database
-const db = require('./database/db-connector')
-// Handlebars
-const { engine } = require('express-handlebars');
-var exphbs = require('express-handlebars');
-const { query } = require('express');
-app.engine('.hbs', exphbs({
-    extname: ".hbs"
-}));
-app.set('view engine', '.hbs');
+app.use(express.static(__dirname + '/public'));         // this is needed to allow for the form to use the ccs style sheet/javscript
 
 /*
     ROUTES
 */
 app.get('/', function(req, res)
     {
+        console.log('TESTING');
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('index', {data: rows});
         })
     });
 
-app.get('/members.hbs', function(req, res)
+app.get('/members', (req, res) =>
     {
         let query1 = "SELECT * FROM Members";
         db.pool.query(query1, function(error, rows, fields) {
             res.render('members.hbs', {data: rows});
-        });        
+        })       
     });
- app.get('/activities.hbs', function(req, res)
+ app.get('/activities', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('activites', {data: rows});
-        });
+        })
     });
-app.get('/reservations.hbs', function(req, res)
+app.get('/reservations', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('reservations', {data: rows});
         })
     });
-app.get('/equipment.hbs', function(req, res)
+app.get('/equipment', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
@@ -68,7 +70,7 @@ app.get('/equipment.hbs', function(req, res)
 // Search for members
 app.post('/add-member', function(req, res) {
     let body = req.body;
-
+    console.log('Body:', req);
     const name = body.name;
     const email = body.email;
     let phone_number;
@@ -77,7 +79,7 @@ app.post('/add-member', function(req, res) {
     } else {
         phone_number = 'NULL'
     }
-    const join_date = body.joinDate;
+    const join_date = body.join_date;
 
     query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone_number}', '${join_date}')`;    
     db.pool.query(query, function(error, row, fields) {
@@ -90,19 +92,19 @@ app.post('/add-member', function(req, res) {
     });
 });
 
-app.put('/edit-member/', function(req, res) {
+app.post('/edit-member', function(req, res) {
     let body = req.body;
 
-    const id = parseInt(body.id);
+    const id = parseInt(body.member_id);
     const name = body.name;
     const email = body.email;
     let phone_number;
-    if (body.phone_number != '') {
-        phone_number = body.phone_number
+    if (body.phone != '') {
+        phone_number = body.phone
     } else {
         phone_number = 'NULL'
     }
-    const join_date = body.joinDate;
+    const join_date = body.join_date;
     
     query = `UPDATE Members SET name = ?, email = ?, phone = ?, join_date = ? WHERE memberId = ?`;
     db.pool.query(query, [name, email, phone_number, join_date, id], function(error, rows, fields) {
@@ -111,20 +113,19 @@ app.put('/edit-member/', function(req, res) {
             res.sendStatus(400);
         }
         else {
-            res.send(rows);
+            res.redirect('members');
         }
     });
 });
 
 app.delete('/delete-member', function(req, res) {
-    let body = req.body;
-
-    const id = body.id;
     
-    query = 'DELETE FROM Members WHERE id = ?';
+    const id = parseInt(req.body.member_id);
+    console.log(req.body);
+    query = 'DELETE FROM Members WHERE memberID = ?';
     db.pool.query(query, [id], function(error, rows, fields) {
         if (error) {
-            console.log(error);
+            // console.log(error);
             res.sendStatus(400);
         } else {
             res.sendStatus(204);
