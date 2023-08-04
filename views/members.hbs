@@ -35,13 +35,19 @@
     </table>
     {{!-- <table class="main-table">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Join date</th>
+            {{#each data.[0]}}
+            <th>{{@key}}</th>
+            
+            {{/each}}
             <th>Delete</th>
+            
         </tr>
+        </thead>
+        
+        <tbody>
+            
+            {{#each data}}
+        
         <tr>
             <td>1</td>
             <td>Abhram Medina</td>
@@ -69,7 +75,7 @@
     </table> --}}
     <div class='section'>
         <h2>Search for a member</h2>
-        <form id='search-member-html' method='GET' action='/members.html'>
+        <form id='search-member-html' method='GET' action='/members.hbs'>
             <table class='sub-table'>
                 <tr>
                     <td><p><label for='input-owner_name'>Member name: </label></p></td>
@@ -83,7 +89,7 @@
             </table>
             <div class='form-btns'>
                 <input type='submit' value='Search' />
-                <a href='/members.html'><input type='button' value='Back' /></a>
+                <a href='/members.hbs'><input type='button' value='Back' /></a>
             </div>
         </form>
     </div>
@@ -92,23 +98,23 @@
         <form method="POST" id="addMember" action="/add-member">
             <table class="sub-table">
                 <tr>
-                    <td>Name:</td>
-                    <td><input type="text" id="name" name="name"  required></td>
+                    <td><label for='name'>Name:</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
                     <td>*Required</td>
 
                 </tr>
                 <tr>
-                    <td>Email:</td>
+                    <td><label for='Email'>Email:</label></td>
                     <td><input type="text" id="email" name="email" required></td>
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>Phone:</td>
+                    <td><label for='phone'>Phone:</label></td>
                     <td><input type="text" id="phone" name="phone"></td>
                 </tr>
                 <tr>
-                    <td>Join Date:</td>
-                    <td><input type="date" id="join_date" name="join_date" required ></td>
+                    <td><label for='join_date'>Join_date:</label></td>
+                    <td><input type="date" id="join_date" name='join_date'required ></td>
                     <td>*Required</td>
                 </tr>
             </table>

@@ -27,17 +27,17 @@ app.use(express.static(__dirname + '/public'));         // this is needed to all
 */
 app.get('/', function(req, res)
     {
-        console.log('TESTING');
-        let query1 = "SELECT * FROM bsg_people;";
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('index', {data: rows});
-        })
+    let query1 = "SELECT * FROM bsg_people;";
+    db.pool.query(query1, function(error, rows, fields){
+        res.render('index', {data: rows});
+    })
+                
     });
 
 app.get('/members', (req, res) =>
     {
-        let query1 = "SELECT * FROM Members";
-        db.pool.query(query1, function(error, rows, fields) {
+    let query1 = "SELECT * FROM Members;";
+    db.pool.query(query1, function(error, rows, fields){
             res.render('members.hbs', {data: rows});
         })       
     });
@@ -68,7 +68,7 @@ app.get('/equipment', function(req, res)
 
 // Members
 // Search for members
-app.post('/add-member', function(req, res) {
+app.post('/addMember', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
     const name = body.name;
@@ -81,13 +81,13 @@ app.post('/add-member', function(req, res) {
     }
     const join_date = body.join_date;
 
-    query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone_number}', '${join_date}')`;    
+    let query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone}', '${join_date}')`;    
     db.pool.query(query, function(error, row, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.redirect('/members');
+            res.redirect('/members.hbs');
         }
     });
 });
