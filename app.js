@@ -74,15 +74,15 @@ app.post('/addMember', function(req, res) {
 
     let name = body.name;
     let email = body.email;
-    let phone;
+    let phone 
     if (body.phone != '') {
         phone = body.phone
     } else {
         phone = 'NULL'
-    }
+    };
     let join_date = body.join_date;
 
-    query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone}', '${join_date}')`;    
+    let query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone}', '${join_date}')`;    
     db.pool.query(query, function(error, row, fields) {
         if (error) {
             console.log(error);
