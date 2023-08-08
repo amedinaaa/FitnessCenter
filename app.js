@@ -6,7 +6,7 @@ SETUP
 
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 50900;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 50906;                 // Set a port number at the top so it's easy to change in the future
 
 // app.js
 const { engine } = require('express-handlebars');
@@ -36,16 +36,28 @@ app.get('/', function(req, res)
 
 app.get('/members', (req, res) =>
     {
-    let query1 = "SELECT * FROM Members;";
+    let query1;
+    if (req.query.name === undefined)
+    {
+        query1 = "SELECT * FROM Members;";
+
+    }
+    else
+    {
+        query1 =`SELECT * FROM Members WHERE name LIKE "${req.query.name}%"`
+    }
+    
     db.pool.query(query1, function(error, rows, fields){
-            res.render('members.hbs', {data: rows});
-        })       
-    });
+        let members = rows;
+        return res.render('members', {data: rows});
+        })
+            
+        });
  app.get('/activities', function(req, res)
     {
         let query1 = "SELECT * FROM bsg_people;";
         db.pool.query(query1, function(error, rows, fields){
-            res.render('activites', {data: rows});
+            res.render('activities', {data: rows});
         })
     });
 app.get('/reservations', function(req, res)

@@ -1,7 +1,7 @@
 
         <script src="/functions/delete-member.js"></script>
 
-        <hr/>
+        
         <h1>Members</h1>
     <p>Current Members</p>
         <table class="main-table">
@@ -75,13 +75,13 @@
     </table> --}}
     <div class='section'>
         <h2>Search for a member</h2>
-        <form id='search-member-html' method='GET' action='/members.hbs'>
+        <form id='search-member-html' method='GET' action='/members'>
             <table class='sub-table'>
                 <tr>
                     <td><p><label for='input-owner_name'>Member name: </label></p></td>
                     <td><input
                             type='text'
-                            name='member_name'
+                            name='name'
                             id='input-member_name-html-search'
                             required
                         /></td>
@@ -89,7 +89,7 @@
             </table>
             <div class='form-btns'>
                 <input type='submit' value='Search' />
-                <a href='/members.hbs'><input type='button' value='Back' /></a>
+                <a href='/members'><input type='button' value='Back' /></a>
             </div>
         </form>
     </div>
