@@ -1,5 +1,5 @@
 
-        <script src="/functions/delete-member.js"></script>
+        <script src="/functions/delete-functions.js"></script>
         <script type="text/javascript">
 
        
@@ -37,46 +37,9 @@
             {{/each}}
         </tbody>
     </table>
-    {{!-- <table class="main-table">
-        <tr>
-            {{#each data.[0]}}
-            <th>{{@key}}</th>
-            
-            {{/each}}
-            <th>Delete</th>
-            
-        </tr>
-        </thead>
+  
+       
         
-        <tbody>
-            
-            {{#each data}}
-        
-        <tr>
-            <td>1</td>
-            <td>Abhram Medina</td>
-            <td>abhram@gmail.com</td>
-            <td>555-432-1987</td>
-            <td>2020-01-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Chris McDaniel</td>
-            <td>Chris@yahoo.com</td>
-            <td>555-432-9856</td>
-            <td>2020-03-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Bob Davis</td>
-            <td>bob@davisinc.com</td>
-            <td>555-465-7410</td>
-            <td>2022-12-01</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-    </table> --}}
     <div class='section'>
         <h2>Search for a member</h2>
         <form id='search-member-html' method='GET' action='/members'>
@@ -180,29 +143,3 @@
     </div>
 
 
-{{!-- <table>
-
-    <thead>
-
-        <tr>
-            {{#each data.[0]}}
-            <th>
-                {{@key}}
-            </th>
-            {{/each}}
-        </tr>
-    </thead>
-
-    <tbody>
-
-        {{#each data}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.fname}}</td>
-            <td>{{this.lname}}</td>
-            <td>{{this.homeworld}}</td>
-            <td>{{this.age}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table> --}}

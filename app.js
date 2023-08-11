@@ -58,7 +58,7 @@ app.get('/members', (req, res) =>
         });
  app.get('/activities', function(req, res)
     {
-        let query1 = "SELECT * FROM bsg_people;";
+        let query1 = "SELECT * FROM Activities;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('activities', {data: rows});
         })
@@ -165,7 +165,7 @@ app.post('/add-equipment', function(req, res) {
 
 app.delete('/delete-equipment', function(req, res) {
     
-    const id = parseInt(req.body.equipment_id);
+    const id = parseInt(req.body.equipmentID);
     console.log(req.body);
     query = 'DELETE FROM Equipments WHERE equipmentID = ?';
     db.pool.query(query, [id], function(error, rows, fields) {
@@ -177,6 +177,40 @@ app.delete('/delete-equipment', function(req, res) {
         }
     });
 });
+
+//Activities
+app.post('/add-activity', function(req, res) {
+    let body = req.body;
+    console.log('Body:', req);
+    const name = body.name;
+    const equipmentID = body.equipmentID
+
+    let query = `INSERT INTO Activities (name, equipmentID) VALUES('${name}', '${equipmentID}')`;    
+    db.pool.query(query, function(error, row, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/activities');
+        }
+    });
+});
+
+app.delete('/delete-activity', function(req, res) {
+    
+    const id = parseInt(req.body.activityID);
+    console.log(req.body);
+    query = 'DELETE FROM Activities WHERE activityID = ?';
+    db.pool.query(query, [id], function(error, rows, fields) {
+        if (error) {
+            // console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+
 
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
