@@ -1,6 +1,10 @@
 
         <script src="/functions/delete-member.js"></script>
+        <script type="text/javascript">
 
+       
+       
+        </script>
         
         <h1>Members</h1>
     <p>Current Members</p>
@@ -109,8 +113,8 @@
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td><label for='phone'>Phone:</label></td>
-                    <td><input type="text" id="phone" name="phone"></td>
+                    <td><label for='phone_number'>Phone:</label></td>
+                    <td><input type="text" id="phone_number" name="phone_number"></td>
                 </tr>
                 <tr>
                     <td><label for='join_date'>Join_date:</label></td>
@@ -128,44 +132,41 @@
         <h2>Edit a member</h2>
         <p><em>Select a member from the drop-down menu and input new information for the member
 		</em></p>
-	<form id='edit-member' method='post' action='/edit-member'>
+	<form id='edit-member-ajax' method='post' action='/edit-member'>
             <table class="sub-table">
                 <tr>
                     <td><label for='member_id'>Select a member: </label></td>
                     <td><select
                             name='member_id'
-                            id='edit_member_selection'
-                            onChange='fillForm()'
+                            id='edit_member_selection_ajax'
+                            onclick="fillform()"
                             required
                         >
                         <option value='member'>Select a member</option>
-							<option value='1'>Abhram Medina
-						</option>
-							<option value='2'>Chris McDaniel
-							</option>
-							<option value='3'>Bob Davis
-								</option>
+                        {{#each fitmembers}}
+							<option value='{{this.memberID}}'>{{this.name}}</option>
+							{{/each}}
                         </select></td>
                         <td>*Required</td>
                     
                 </tr>
                 <tr>
-                    <td>Name:</td>
-                    <td><input type="text" id="name" name="name"></td>
+                    <td><label for="update_name">Name:</label></td>
+                    <td><input type="text" id="update_name" name="update_name" required></td>
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>Email:</td>
-                    <td><input type="text" id="email" name="email"></td>
+                    <td><label for="update_email">Email:</label></td>
+                    <td><input type="text" id="update_email" name="update_email" required></td>
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>Phone:</td>
-                    <td><input type="text" id="phone" name="phone"></td>
+                    <td><label for="update_phone">Phone:</label></td>
+                    <td><input type="text" id="update_phone" name="update_phone"></td>
                 </tr>
                 <tr>
-                    <td>Join Date:</td>
-                    <td><input type="date" id="join_date" name="join_date"></td>
+                    <td><label for="update_date">Join Date:</label></td>
+                    <td><input type="date" id="update_date" name="update_date" required></td>
                     <td>*Required</td>
                 </tr>
           

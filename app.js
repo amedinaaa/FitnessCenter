@@ -46,10 +46,13 @@ app.get('/members', (req, res) =>
     {
         query1 =`SELECT * FROM Members WHERE name LIKE "${req.query.name}%"`
     }
-    
+    let query2 = "SELECT * FROM Members"
     db.pool.query(query1, function(error, rows, fields){
         let members = rows;
-        return res.render('members', {data: rows});
+        db.pool.query(query2, (error,rows, fields) => {
+            let fitmembers = rows;
+            return res.render('members', {data: members, fitmembers: fitmembers});
+        })
         })
             
         });
@@ -69,18 +72,15 @@ app.get('/reservations', function(req, res)
     });
 app.get('/equipment', function(req, res)
     {
-        let query1 = "SELECT * FROM bsg_people;";
+        let query1 = "SELECT * FROM Equipments;";
         db.pool.query(query1, function(error, rows, fields){
-            res.render('equipment', {data: rows});
+            return res.render('equipment', {data: rows});
         })
     });
 
 
- 
-
 // Members
-// Search for members
-app.post('/addMember', function(req, res) {
+app.post('/add-member', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
     const name = body.name;
@@ -93,13 +93,13 @@ app.post('/addMember', function(req, res) {
     }
     const join_date = body.join_date;
 
-    let query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone}', '${join_date}')`;    
+    let query = `INSERT INTO Members (name, email, phone, join_date) VALUES('${name}', '${email}', '${phone_number}', '${join_date}')`;    
     db.pool.query(query, function(error, row, fields) {
         if (error) {
             console.log(error);
             res.sendStatus(400);
         } else {
-            res.redirect('/members.hbs');
+            res.redirect('/members');
         }
     });
 });
@@ -111,7 +111,7 @@ app.post('/edit-member', function(req, res) {
     const name = body.name;
     const email = body.email;
     let phone_number;
-    if (body.phone != '') {
+    if (body.phone_number != '') {
         phone_number = body.phone
     } else {
         phone_number = 'NULL'
@@ -145,7 +145,38 @@ app.delete('/delete-member', function(req, res) {
     });
 });
 
+//Equipment
+app.post('/add-equipment', function(req, res) {
+    let body = req.body;
+    console.log('Body:', req);
+    const name = body.name;
+    const itemCount = body.item_count
 
+    let query = `INSERT INTO Equipments (name, item_count) VALUES('${name}', '${itemCount}')`;    
+    db.pool.query(query, function(error, row, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/equipment');
+        }
+    });
+});
+
+app.delete('/delete-equipment', function(req, res) {
+    
+    const id = parseInt(req.body.equipment_id);
+    console.log(req.body);
+    query = 'DELETE FROM Equipments WHERE equipmentID = ?';
+    db.pool.query(query, [id], function(error, rows, fields) {
+        if (error) {
+            // console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
 
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
