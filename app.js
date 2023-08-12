@@ -1,17 +1,26 @@
 /*
 SETUP
 */
-
 // Express
 
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 PORT        = 50906;                 // Set a port number at the top so it's easy to change in the future
+var moment = require('moment');
 
 // app.js
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
-app.engine('.hbs', exphbs({extname: ".hbs"}));  // Create an instance of the handlebars engine to process templates
+app.engine('.hbs', exphbs(
+    {
+        extname: ".hbs",
+        helpers: {
+            formatDate(format) {
+                const current = moment(this.join_date);
+                return current.format(format);
+            }
+        }
+    }));  // Create an instance of the handlebars engine to process templates
 app.set('view engine', '.hbs');                 // Tell express to use the handlebars engine whenever it encounters a *.hbs file.
 
 // Database
@@ -56,6 +65,7 @@ app.get('/members', (req, res) =>
         })
             
         });
+
  app.get('/activities', function(req, res)
     {
         let query1 = "SELECT * FROM Activities;";
@@ -104,19 +114,26 @@ app.post('/add-member', function(req, res) {
     });
 });
 
+app.get('/member-by-id/:id', (req, res) => {
+    const memberId = req.params.id;
+    const query = `SELECT * FROM Members WHERE memberID = ${memberId}`;
+    db.pool.query(query, (error, member, fields) => {
+        return res.send(member[0]);
+    });
+});
+
 app.post('/edit-member', function(req, res) {
     let body = req.body;
-
     const id = parseInt(body.member_id);
-    const name = body.name;
-    const email = body.email;
+    const name = body.update_name;
+    const email = body.update_email;
     let phone_number;
-    if (body.phone_number != '') {
-        phone_number = body.phone
+    if (body.update_phone != '') {
+        phone_number = body.update_phone
     } else {
         phone_number = 'NULL'
     }
-    const join_date = body.join_date;
+    const join_date = body.update_date;
     
     query = `UPDATE Members SET name = ?, email = ?, phone = ?, join_date = ? WHERE memberId = ?`;
     db.pool.query(query, [name, email, phone_number, join_date, id], function(error, rows, fields) {
@@ -210,6 +227,7 @@ app.delete('/delete-activity', function(req, res) {
         }
     });
 });
+
 
 
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.

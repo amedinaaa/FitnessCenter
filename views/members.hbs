@@ -1,5 +1,6 @@
 
         <script src="/functions/delete-functions.js"></script>
+        <script src="/functions/update-functions.js"></script>
         <script type="text/javascript">
 
        
@@ -30,7 +31,7 @@
                 <td>{{this.name}}</td>
                 <td>{{this.email}}</td>
                 <td>{{this.phone}}</td>
-                <td>{{this.join_date}}</td>
+                <td>{{formatDate 'MM/DD/YYYY'}}</td>
                 <td><button onclick="deleteMember({{ this.memberID }})">Delete</button></td>
 
             </tr>
@@ -102,7 +103,7 @@
                     <td><select
                             name='member_id'
                             id='edit_member_selection_ajax'
-                            onclick="fillform()"
+                            onchange="fillUpdateMemberForm(this.value)"
                             required
                         >
                         <option value='member'>Select a member</option>
