@@ -66,13 +66,17 @@ app.get('/members', (req, res) =>
             
         });
 
- app.get('/activities', function(req, res)
-    {
-        let query1 = "SELECT activityID, Activities.name, Equipments.name as equipment FROM Activities JOIN Equipments on Activities.equipmentID = Equipments.equipmentID;";
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('activities', {data: rows});
-        })
-    });
+app.get('/activities', function(req, res)
+        {
+            let query1 = "SELECT activityID, Activities.name, Equipments.name as equipment FROM Activities JOIN Equipments on Activities.equipmentID = Equipments.equipmentID;";
+            let query2= "SELECT * from Equipments;";
+            db.pool.query(query1, function(error, rows, fields){
+                db.pool.query(query2,function(error, equipments, fields){
+                    res.render('activities', {data: rows, equipments: equipments});
+                });
+            
+            });
+        });
 app.get('/reservations', function(req, res)
     {
         let query1 = "SELECT reservationID, Members.name as member_name, Activities.name as activity, reservation_start, reservation_end FROM Reservations JOIN Members ON Reservations.memberID = Members.memberID JOIN Activities on Reservations.activityID = Activities.activityID ORDER BY Reservations.reservation_start ASC;";
@@ -206,8 +210,7 @@ app.post('/add-activity', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
     const name = body.name;
-    const equipmentID = body.equipmentID
-
+    const equipmentID = parseInt(body.equipmentID);
     let query = `INSERT INTO Activities (name, equipmentID) VALUES('${name}', '${equipmentID}')`;    
     db.pool.query(query, function(error, row, fields) {
         if (error) {

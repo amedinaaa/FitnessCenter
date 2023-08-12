@@ -32,14 +32,23 @@
         <h2>Add an activity</h2>
         <form method="POST" id="addActivity" action="add-activity">
             <table class='sub-table'>
-                 <tr>
+                <tr>
                     <td><label for='name'>Name:</label></td>
                     <td><input type="text" id="name" name="name" required></td>
                     <td>*Required</td>
                 </tr>
                 <tr>
-                    <td><label for='equipmentID'>Equipment ID:</label></td>
-                    <td><input type="number" id="equipmentID" name="equipmentID" required></td>
+                    <td>Equipment</td>
+                    <td><select
+                    name="equipmentID"
+                    id="equipmentID"
+                    required
+                    >
+                    <option value="equipmentID">Select equipment</option>
+                        {{#each equipments}}
+                            <option value="{{this.equipmentID}}">{{this.name}}</option>
+                            {{/each}}
+                    </select></td>
                     <td>*Required</td>
                 </tr>
             </table>
