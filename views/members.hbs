@@ -31,7 +31,7 @@
                 <td>{{this.name}}</td>
                 <td>{{this.email}}</td>
                 <td>{{this.phone}}</td>
-                <td>{{formatDate 'MM/DD/YYYY'}}</td>
+                <td>{{formatDate this.join_date 'MM/DD/YYYY'}}</td>
                 <td><button onclick="deleteMember({{ this.memberID }})">Delete</button></td>
 
             </tr>

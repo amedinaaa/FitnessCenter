@@ -68,7 +68,7 @@ app.get('/members', (req, res) =>
 
  app.get('/activities', function(req, res)
     {
-        let query1 = "SELECT * FROM Activities;";
+        let query1 = "SELECT activityID, Activities.name, Equipments.name as equipment FROM Activities JOIN Equipments on Activities.equipmentID = Equipments.equipmentID;";
         db.pool.query(query1, function(error, rows, fields){
             res.render('activities', {data: rows});
         })
