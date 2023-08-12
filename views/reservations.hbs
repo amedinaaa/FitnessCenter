@@ -1,95 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
+        <script src="/functions/delete-functions.js"></script>
 
-<head>
-    <meta charset="utf-8">
-    <link id="styleSheet" href="css/style.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
- {{!--    <div class='navbar'>
-        <div class='title'>
-            <a href="index.html"><img src='imgs/FitnessCenterIMG.png'/></a>
-            <a href="index.html"><h1> The Fitness Center</h1> </a>
-        </div> 
-
- <p> <a href="/"> Home </a> |
-        <a href="members.hbs">Members</a> |
-        <a href="activities.hbs">Activities</a> |
-        <a href="equipment.hbs">Equipment</a> | 
-        <a href="reservations.hbs">[ Reservations ]</a></a> </p>
-        <hr/> --}}
         <h1>Reservations</h1>
     <p>Current Reservations</p>
-    <table class='main-table'> 
-        <tr>
-            <th>ID</th>
-            <th>MemberID</th>
-            <th>ActivityID</th>
-            <th>Reservation start</th>
-            <th>Reservation end</th>
-            <th>Delete</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>2023-08-01 11:00:00</td>
-            <td>2023-08-01 13:00:00</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>2</td>
-            <td>1</td>
-            <td>2023-08-01 08:00:00</td>
-            <td>2023-08-01 12:00:00</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>1</td>
-            <td>4</td>
-            <td>2023-08-02 17:00:00</td>
-            <td>2023-08-02 19:00:00</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>3</td>
-            <td>3</td>
-            <td>2023-08-03 10:00:00</td>
-            <td>2023-08-03 13:00:00</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2023-08-01 12:00:00</td>
-            <td>2023-08-01 13:00:00</td>
-            <td><button onclick="">Delete</button></td>
-        </tr>
+    <table class="main-table">
+
+        <thead>
+
+            <tr>
+                {{#each data.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {{#each data}}
+            <tr>
+                <td>{{this.reservationID}}</td>
+                <td>{{this.member_name}}</td>
+                <td>{{this.activity}}</td>
+                <td>{{formatDate this.reservation_start "MM/DD/YYYY h:mma"}}</td>
+                <td>{{formatDate this.reservation_end "MM/DD/YYYY h:mma"}}</td>
+                <td><button onclick="deleteReservation({{ this.reservationID }})">Delete</button></td>
+
+            </tr>
+            {{/each}}
+        </tbody>
     </table>
     <div class="section"></div>    
         <h2>Add a Reservation</h2>
-        <form method="POST" id="addMember">
+        <form method="POST" id="addReservation" action="/add-reservation">
             <table class="sub-table">
                 <tr>
-                    <td>MemberID:</td>
-                    <td><input type="text" id="memberID"></td>
+                    <td>Select Member:</td>
+                    <td>
+                        <select
+                            name='memberID'
+                            id='memberID'
+                            required
+                        >
+                    <option value='memberID'>Select a member</option>
+                        {{#each members}}
+							<option value='{{this.memberID}}'>{{this.name}}</option>
+							{{/each}}
+                        </select></td>
+                        <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>ActivityID:</td>
-                    <td><input type="text" id="activityID"></td>
+                    <td>Select Activity:</td>
+                    <td>
+                        <select
+                            name='activityID'
+                            id='activityID'
+                            required
+                        >
+                    <option value='activityID'>Select an activity</option>
+                        {{#each activities}}
+							<option value='{{this.activityID}}'>{{this.name}}</option>
+							{{/each}}
+                        </select></td>
+                        <td>*Required</td>
                 </tr>
                 <tr>
                     <td>Reservation start:</td>
-                    <td><input type="datetime-local" id="reservationStart"></td>
+                    <td><input type="datetime-local" id="reservationStart" name="reservationStart" required></td>
+                    <td>*Required</td>
                 </tr>
                 <tr>
-                    <td>Reservation end</td>
-                    <td><input type="datetime-local" id="reservationEnd"></td>
+                    <td>Reservation end:</td>
+                    <td><input type="datetime-local" id="reservationEnd" name="reservationEnd" required></td>
+                    <td>*Required</td>
                 </tr>      
             </table>
     <div class="form-btns">
@@ -97,8 +81,3 @@
     </div>
       </form> 
     </div>
-
-</body>
-<hr/>
-<p><em>© 2023 Abhram Medina, Chris McDaniel</em></p>
-</html>

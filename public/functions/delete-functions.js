@@ -30,3 +30,14 @@ function deleteActivity(id) {
     xmlHttp.send( JSON.stringify(data) );
     window.location.reload();
 }
+
+async function deleteReservation(id) {
+    const data = {
+        reservationID: id
+    };
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "DELETE", "/delete-reservation", false );
+    xmlHttp.setRequestHeader("Content-type", "application/json");
+    xmlHttp.send( JSON.stringify(data) );
+    window.location.reload();
+}

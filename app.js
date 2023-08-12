@@ -15,8 +15,8 @@ app.engine('.hbs', exphbs(
     {
         extname: ".hbs",
         helpers: {
-            formatDate(format) {
-                const current = moment(this.join_date);
+            formatDate(date, format) {
+                const current = moment(date);
                 return current.format(format);
             }
         }
@@ -75,10 +75,16 @@ app.get('/members', (req, res) =>
     });
 app.get('/reservations', function(req, res)
     {
-        let query1 = "SELECT * FROM bsg_people;";
-        db.pool.query(query1, function(error, rows, fields){
-            res.render('reservations', {data: rows});
-        })
+        let query1 = "SELECT reservationID, Members.name as member_name, Activities.name as activity, reservation_start, reservation_end FROM Reservations JOIN Members ON Reservations.memberID = Members.memberID JOIN Activities on Reservations.activityID = Activities.activityID ORDER BY Reservations.reservation_start ASC;";
+        let query2 = "SELECT * FROM Members";
+        let query3 = "SELECT activityID, name FROM Activities;"
+        db.pool.query(query1, function(error, reservations, fields){
+            db.pool.query(query2, function(error, members, fields){
+                db.pool.query(query3, function(error, activities, fields){
+                    res.render('reservations', {data: reservations, members: members, activities: activities});
+                });
+            });
+        });
     });
 app.get('/equipment', function(req, res)
     {
@@ -228,7 +234,37 @@ app.delete('/delete-activity', function(req, res) {
     });
 });
 
+// Reservations
+app.delete('/delete-reservation', function(req, res) {
+    const id = parseInt(req.body.reservationID);
+    query = 'DELETE FROM Reservations WHERE reservationID = ?';
+    db.pool.query(query, [id], function(error, rows, fields) {
+        if (error) {
+            // console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+app.post('/add-reservation', function(req, res) {
+    let body = req.body;
+    console.log('Body:', req.body);
+    const memberID = parseInt(body.memberID);
+    const activityID = parseInt(body.activityID);
+    const start = body.reservationStart;
+    const end = body.reservationEnd;
 
+    let query = `INSERT INTO Reservations (memberID, activityID, reservation_start, reservation_end) VALUES('${memberID}', '${activityID}', '${start}', '${end}')`;    
+    db.pool.query(query, function(error, row, fields) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.redirect('/reservations');
+        }
+    });
+});
 
 app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
