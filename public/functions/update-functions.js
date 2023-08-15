@@ -1,4 +1,4 @@
-
+// Fills out the update member form after a member is selected.
 async function fillUpdateMemberForm (id) {
     let response = await fetch(`/member-by-id/${id}`);
     let data = await response.json();

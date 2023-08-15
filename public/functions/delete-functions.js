@@ -1,3 +1,5 @@
+// Global delete functions for our entities.
+
 function deleteMember(id) {
     const data = {
         member_id: id

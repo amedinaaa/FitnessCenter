@@ -1,3 +1,6 @@
+// Initial setup of App.js is adapted/copied from the class starter code. 
+// This includes the setup, routes and port listener.
+
 /*
 SETUP
 */
@@ -8,7 +11,9 @@ var app     = express();            // We need to instantiate an express object 
 PORT        = 50906;                 // Set a port number at the top so it's easy to change in the future
 var moment = require('moment');
 
-// app.js
+// Cititation for the handlebars setup
+// 08/02/2023
+// Based on: https://stackabuse.com/guide-to-handlebars-templating-engine-for-node/
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');     // Import express-handlebars
 app.engine('.hbs', exphbs(
@@ -99,7 +104,7 @@ app.get('/equipment', function(req, res)
     });
 
 
-// Members
+// Adding Members
 app.post('/add-member', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
@@ -124,6 +129,7 @@ app.post('/add-member', function(req, res) {
     });
 });
 
+// Retrieve member by id
 app.get('/member-by-id/:id', (req, res) => {
     const memberId = req.params.id;
     const query = `SELECT * FROM Members WHERE memberID = ${memberId}`;
@@ -132,6 +138,7 @@ app.get('/member-by-id/:id', (req, res) => {
     });
 });
 
+// Editing members
 app.post('/edit-member', function(req, res) {
     let body = req.body;
     const id = parseInt(body.member_id);
@@ -157,6 +164,7 @@ app.post('/edit-member', function(req, res) {
     });
 });
 
+// Deleting members
 app.delete('/delete-member', function(req, res) {
     
     const id = parseInt(req.body.member_id);
@@ -172,7 +180,7 @@ app.delete('/delete-member', function(req, res) {
     });
 });
 
-//Equipment
+// Adding Equipment
 app.post('/add-equipment', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
@@ -190,6 +198,7 @@ app.post('/add-equipment', function(req, res) {
     });
 });
 
+// Deleting Equipment
 app.delete('/delete-equipment', function(req, res) {
     
     const id = parseInt(req.body.equipmentID);
@@ -205,7 +214,7 @@ app.delete('/delete-equipment', function(req, res) {
     });
 });
 
-//Activities
+// Adding Activities
 app.post('/add-activity', function(req, res) {
     let body = req.body;
     console.log('Body:', req);
@@ -222,6 +231,7 @@ app.post('/add-activity', function(req, res) {
     });
 });
 
+// Deleting Activities
 app.delete('/delete-activity', function(req, res) {
     
     const id = parseInt(req.body.activityID);
@@ -237,7 +247,7 @@ app.delete('/delete-activity', function(req, res) {
     });
 });
 
-// Reservations
+// Deleting Reservations
 app.delete('/delete-reservation', function(req, res) {
     const id = parseInt(req.body.reservationID);
     query = 'DELETE FROM Reservations WHERE reservationID = ?';
@@ -250,6 +260,8 @@ app.delete('/delete-reservation', function(req, res) {
         }
     });
 });
+
+// Adding Reservations
 app.post('/add-reservation', function(req, res) {
     let body = req.body;
     console.log('Body:', req.body);
@@ -269,7 +281,7 @@ app.post('/add-reservation', function(req, res) {
     });
 });
 
-app.listen(PORT, function(){            // This is the basic syntax for what is called the 'listener' which receives incoming requests on the specified PORT.
+app.listen(PORT, function(){       
     console.log('Express started on http://localhost:' + PORT + '; press Ctrl-C to terminate.')
 });
 

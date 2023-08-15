@@ -1,3 +1,6 @@
+// This code is copied from the class DB Connector starter code
+// Credentials have been removed for security purposes. 
+
 // Get an instance of mysql we can use in the app
 var mysql = require('mysql')
 
